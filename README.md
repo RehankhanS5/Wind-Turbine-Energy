@@ -34,7 +34,7 @@ Wind Visualization using Leaflet
 
 1. Clone the repository:
 
-git clone https://github.com/your-username/Wind-Turbine-Energy.git
+git clone https://github.com/RehankhanS5/Wind-Turbine-Energy.git
 
 2. Install requirements:
 
