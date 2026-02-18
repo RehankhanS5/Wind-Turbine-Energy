@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">🔮 Predict Wind Energy Output</h4>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- FORM -->
+                <form method="POST" action="{{ url_for('predict') }}" id="predictionForm">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Wind Speed (m/s)</label>
+                            <input type="number" step="any" name="wind_speed" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Wind Direction (°)</label>
+                            <input type="number" step="any" name="wind_direction" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Air Density (kg/m³)</label>
+                            <input type="number" step="any" name="air_density" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Temperature (°C)</label>
+                            <input type="number" step="any" name="temperature" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Humidity (%)</label>
+                            <input type="number" step="any" name="humidity" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Blade Length (m)</label>
+                            <input type="number" step="any" name="blade_length" class="form-control" required>
+                        </div>
+
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg px-5">
+                            Predict
+                        </button>
+                    </div>
+                </form>
+
+                <!-- LOADING SPINNER -->
+                <div id="loading" class="text-center mt-4" style="display:none;">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2">Predicting wind energy...</p>
+                </div>
+
+                <!-- OUTPUT -->
+                {% if prediction_text %}
+                <div class="alert alert-info mt-4 text-center fw-bold">
+                    {{ prediction_text }}
+                </div>
+                {% endif %}
+
+                <!-- ERROR -->
+                {% if error %}
+                <div class="alert alert-danger mt-4 text-center">
+                    {{ error }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS FOR LOADING -->
+<script>
+document.getElementById("predictionForm").addEventListener("submit", function() {
+    document.getElementById("loading").style.display = "block";
+});
+</script>
+
+{% endblock %}

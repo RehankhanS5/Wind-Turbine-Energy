@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wind Energy Prediction</title>
+
+    <!-- Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="/"> Wind Energy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/predict">Predict</a></li>
+                <li class="nav-item"><a class="nav-link" href="/map">Wind Map</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container py-5 flex-grow-1">
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+    © 2026 Wind Energy Predictor | Next-Generation Renewable Energy Management
+</footer>
+
+</body>
+<!-- Loading Spinner -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner-box">
+        <div class="spinner-border text-success" role="status"></div>
+        <p class="mt-3 fw-semibold">Predicting wind energy output…</p>
+    </div>
+</div>
+<script>
+    // Show loading spinner on form submit
+    document.addEventListener("DOMContentLoaded", function () {
+        const forms = document.querySelectorAll("form");
+
+        forms.forEach(form => {
+            form.addEventListener("submit", function () {
+                const overlay = document.getElementById("loadingOverlay");
+                if (overlay) {
+                    overlay.classList.add("active");
+                }
+
+                const submitBtn = form.querySelector("button[type='submit']");
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = "Predicting...";
+                }
+            });
+        });
+    });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+    // Smooth page transition on link click
+    document.querySelectorAll("a").forEach(link => {
+        if (link.hostname === window.location.hostname) {
+            link.addEventListener("click", function (e) {
+                e.preventDefault();
+                document.body.classList.add("fade-out");
+                setTimeout(() => {
+                    window.location = this.href;
+                }, 300);
+            });
+        }
+    });
+</script>
+
+</html>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-success text-white text-center">
+            <h4> Wind Farm Locations Map</h4>
+            <small>Static Wind Monitoring Map using Leaflet</small>
+        </div>
+
+        <div class="card-body">
+            <div id="map" style="height: 550px; width: 100%; border-radius: 10px;"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Initialize map centered in India
+    const map = L.map('map').setView([20.5937, 78.9629], 5);
+
+    // OpenStreetMap Tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: "© OpenStreetMap contributors"
+    }).addTo(map);
+
+    // Wind farm sample locations
+    const windSites = [
+        { name: "Muppandal Wind Farm", lat: 8.25, lng: 77.78, speed: "7.5 m/s" },
+        { name: "Jaisalmer Wind Park", lat: 26.9, lng: 70.9, speed: "8.1 m/s" },
+        { name: "Kutch Wind Farm", lat: 23.73, lng: 68.78, speed: "7.8 m/s" },
+        { name: "Chitradurga Wind Farm", lat: 14.23, lng: 76.4, speed: "6.9 m/s" }
+    ];
+
+    // Add markers
+    windSites.forEach(site => {
+        L.marker([site.lat, site.lng])
+            .addTo(map)
+            .bindPopup(
+                `<b>${site.name}</b><br>
+                 Estimated Wind Speed: ${site.speed}`
+            );
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+__pycache__/
+
+# Model files
+*.pkl
+
+# Large datasets
+*.csv
+
+# Python cache
+*.pyc
+
+# OS files
+.DS_Store
