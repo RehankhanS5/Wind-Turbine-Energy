@@ -1,4 +1,4 @@
-# 🌬 Wind Turbine Energy Prediction System
+#  Wind Turbine Energy Prediction System
 
 A Machine Learning-based web application that predicts wind turbine energy output using weather parameters.
 
